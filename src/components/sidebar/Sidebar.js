@@ -12,8 +12,15 @@ import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import AppsIcon from '@material-ui/icons/Apps';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import AddIcon from '@material-ui/icons/Add';
 
 function Sidebar() {
+    // const [channels, setChannels] = useState([]);
+    //
+    // useEffect(() => {
+    //     //Run this code ONCE when the sidebar component loads
+    // }, [])
+
     return (
         <div className="sidebar">
             <div className="sidebar__header">
@@ -30,12 +37,14 @@ function Sidebar() {
             <SidebarOption Icon={InboxIcon} title="Mentions & Reactions"/>
             <SidebarOption Icon={DraftsIcon} title="Saved Items"/>
             <SidebarOption Icon={BookmarkBorderIcon} title="Channel Browser"/>
-            <SidebarOption Icon={PeopleAltIcon} title="People & User groups"/>
+            <SidebarOption Icon={PeopleAltIcon} title="People & User Groups"/>
             <SidebarOption Icon={AppsIcon} title="Apps"/>
             <SidebarOption Icon={FileCopyIcon} title="FileBrowser"/>
             <SidebarOption Icon={ExpandLessIcon} title="Show less"/>
             <hr/>
             <SidebarOption Icon={ExpandMoreIcon} title="Channels"/>
+            <hr/>
+            <SidebarOption Icon = {AddIcon} addChannelOption title = "Add Channel" />
         </div>
     );
 }
