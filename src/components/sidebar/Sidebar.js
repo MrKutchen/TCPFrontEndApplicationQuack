@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import './Sidebar.css';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import CreateIcon from '@material-ui/icons/Create';
 import InsertCommentIcon from '@material-ui/icons/InsertComment';
-import SidebarOption from "./SideBarOption";
+import SideBarOptions from "./SideBarOptions";
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
@@ -13,40 +13,62 @@ import AppsIcon from '@material-ui/icons/Apps';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddIcon from '@material-ui/icons/Add';
+import axios from "axios";
+import {URL} from "../../Constants";
 
 function Sidebar() {
-    // const [channels, setChannels] = useState([]);
-    //
-    // useEffect(() => {
-    //     //Run this code ONCE when the sidebar component loads
-    // }, [])
 
-    return (
-        <div className="sidebar">
-            <div className="sidebar__header">
-                <div className="sidebar__info">
-                    <h2>Quack</h2>
-                    <h3>
-                        <FiberManualRecordIcon/>
-                        Peter Kutchen
-                    </h3>
-                </div>
-                <CreateIcon/>
+    const Channel = () => {
+    const [channels, setChannels] = useState([]);
+
+    const fetchChannels = () => {
+        axios.get(`${URL}/channels`).then(res => {
+            console.log(res);
+            setChannels(res.data);
+        })
+    }
+
+    useEffect(() => {
+        fetchChannels();
+    }, []);
+
+    return channels.map((channel, index) => {
+
+        return (
+            <div key={index}>
+                <p>{channel.channelName}</p>
             </div>
-            <SidebarOption Icon={InsertCommentIcon} title="Threads"/>
-            <SidebarOption Icon={InboxIcon} title="Mentions & Reactions"/>
-            <SidebarOption Icon={DraftsIcon} title="Saved Items"/>
-            <SidebarOption Icon={BookmarkBorderIcon} title="Channel Browser"/>
-            <SidebarOption Icon={PeopleAltIcon} title="People & User Groups"/>
-            <SidebarOption Icon={AppsIcon} title="Apps"/>
-            <SidebarOption Icon={FileCopyIcon} title="FileBrowser"/>
-            <SidebarOption Icon={ExpandLessIcon} title="Show less"/>
-            <hr/>
-            <SidebarOption Icon={ExpandMoreIcon} title="Channels"/>
-            <hr/>
-            <SidebarOption Icon = {AddIcon} addChannelOption title = "Add Channel" />
-        </div>
-    );
+        )
+    })
+};
+
+        return (
+            <div className="sidebar">
+                <div className="sidebar__header">
+                    <div className="sidebar__info">
+                        <h2>Quack</h2>
+                        <h3>
+                            <FiberManualRecordIcon/>
+                            Peter Kutchen
+                        </h3>
+                    </div>
+                    <CreateIcon/>
+                </div>
+                <SideBarOptions Icon={InsertCommentIcon} title="Threads"/>
+                <SideBarOptions Icon={InboxIcon} title="Mentions & Reactions"/>
+                <SideBarOptions Icon={DraftsIcon} title="Saved Items"/>
+                <SideBarOptions Icon={BookmarkBorderIcon} title="Channel Browser"/>
+                <SideBarOptions Icon={PeopleAltIcon} title="People & User Groups"/>
+                <SideBarOptions Icon={AppsIcon} title="Apps"/>
+                <SideBarOptions Icon={FileCopyIcon} title="FileBrowser"/>
+                <SideBarOptions Icon={ExpandLessIcon} title="Show less"/>
+                <hr/>
+                <SideBarOptions Icon={ExpandMoreIcon} title="Channels"/>
+                <hr/>
+                <SideBarOptions Icon={AddIcon} addChannelOption title="Add Channel"/>
+                <Channel/>
+            </div>
+        );
 }
 
 export default Sidebar
