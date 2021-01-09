@@ -4,6 +4,7 @@ import {useParams} from 'react-router-dom';
 import StarBorderOutlinedIcon from "@material-ui/icons/StarBorderOutlined"
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined"
 import db from './firebase';
+import Message from './Message';
 
 function Chat() {
     const {channelId} = useParams();
@@ -21,7 +22,7 @@ function Chat() {
         db.collection("channels")
             .doc(channelId)
             .collection('messages')
-            .orderBy('timestamp',"asc")
+            .orderBy('timestamp', "asc")
             .onSnapshot((snapshot) => setChannelMessages(snapshot.docs.map((doc) => doc.data())))
 
     }, [channelId])
@@ -45,9 +46,9 @@ function Chat() {
                 {channelMessages.map(({message, timestamp, user, userImage}) => (
                     <Message
                         message={message}
-                        timestamp ={timestamp}
-                        user ={user}
-                        userImage = {userImage}
+                        timestamp={timestamp}
+                        user={user}
+                        userImage={userImage}
                     />
                 ))}
             </div>

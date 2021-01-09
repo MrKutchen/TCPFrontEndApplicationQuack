@@ -11,9 +11,8 @@ function Message({message, timestamp, user, userImage }) {
                 </h4>
                 <p>{message}</p>
             </div>
-
         </div>
-    )
+    );
 }
 
 export default Message;

@@ -1,29 +1,39 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import Header from "./Header.js";
 import Sidebar from "./Sidebar.js"
 import Chat from "./Chat.js"
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Login from './Login';
 
 function App() {
+    const [user, setUser] = useState(null);
+
     return (
         //BEM naming convention
         <div className="app">
             <Router>
-                <Header/>
-                <div className="app__body">
-                    <Sidebar/>
+                {!user ? (
+                    <Login />
+                ) : (
+                    <>
 
-                    <Switch>
-                        <Route path="/channel/:channelId">
-                            <Chat/>
-                        </Route>
-                        <Route path="/">
-                            <h1>Welcome</h1>
-                        </Route>
-                    </Switch>
-                    {/*Step 3. React-Router -> Chat Screen*/}
-                </div>
+                        <Header/>
+                        <div className="app__body">
+                            <Sidebar/>
+
+                            <Switch>
+                                <Route path="/channel/:channelId">
+                                    <Chat/>
+                                </Route>
+                                <Route path="/">
+                                    <h1>Welcome</h1>
+                                </Route>
+                            </Switch>
+                        </div>
+                    </>
+                )}
+
             </Router>
         </div>
     );
