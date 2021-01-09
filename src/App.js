@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import './App.css';
-import Header from "./components/header/Header.js";
-import Sidebar from "./components/sidebar/Sidebar.js";
-import Chat from "./components/chat/Chat.js";
+import Header from "./Header.js";
+import Sidebar from "./Sidebar.js";
 
 class App extends Component {
     render() {
@@ -15,9 +14,6 @@ class App extends Component {
                     <div className="app__body">
                         <Sidebar/>
                         <Switch>
-                            <Route path="/channels/:id">
-                                <Chat/>
-                            </Route>
                             <Route path="/">
                                 <h1>Welcome</h1>
                             </Route>
