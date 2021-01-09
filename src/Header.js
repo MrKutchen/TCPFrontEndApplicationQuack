@@ -19,7 +19,6 @@ function Header() {
             <div className="header__search">
                 <SearchIcon/>
                 <input placeholder="Search QUACK"/>
-
             </div>
             <div className="header__right">
                 <HelpOutlineIcon/>

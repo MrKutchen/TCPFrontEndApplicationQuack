@@ -1,5 +1,6 @@
 body {
-    --color: #993333
+    --color: #993333;
+    overflow: hidden;
 }
 
 .app__body {
